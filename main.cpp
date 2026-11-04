@@ -1,44 +1,74 @@
+// Mason Ayala
+// Practice 10 - Gradebook Tools
+
 #include <iostream>
+using namespace std;
 
-// Practice 10 — Your Name
-// CIS 5 Week 10 · Gradebook tools
-
-void printScores(const int scores[], int n) {
-  for (int i = 0; i < n; i++) std::cout << scores[i] << " ";
-  std::cout << "\n";
+void curve(int scores[], int n, int points)
+{
+    for (int i = 0; i < n; i++)
+    {
+        scores[i] += points;
+    }
 }
 
-void curve(int scores[], int n, int points) {
-  // TODO: add points to every score
+void minMax(const int scores[], int n, int& lo, int& hi)
+{
+    lo = scores[0];
+    hi = scores[0];
+
+    for (int i = 1; i < n; i++)
+    {
+        if (scores[i] < lo)
+            lo = scores[i];
+
+        if (scores[i] > hi)
+            hi = scores[i];
+    }
 }
 
-void minMax(const int scores[], int n, int& lo, int& hi) {
-  // TODO: start lo and hi at scores[0], then check the rest
+bool findScore(const int scores[], int n, int target, int* where)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (scores[i] == target)
+        {
+            if (where != nullptr)
+                *where = i;
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
-bool findScore(const int scores[], int n, int target, int* where) {
-  // TODO: when scores[i] == target, write i through where
-  //       (only if where != nullptr) and return true
-  return false;
-}
+int main()
+{
+    int scores[5] = {72, 88, 95, 60, 81};
+    int lo, hi;
+    int index;
 
-int main() {
-  int scores[5] = {72, 88, 95, 60, 81};
-  const int N = 5;
+    cout << "Before: ";
+    for (int i = 0; i < 5; i++)
+        cout << scores[i] << " ";
+    cout << "\n";
 
-  std::cout << "Before: ";
-  printScores(scores, N);
+    minMax(scores, 5, lo, hi);
+    cout << "Low: " << lo << " High: " << hi << "\n";
 
-  int lo = 0, hi = 0;
-  minMax(scores, N, lo, hi);
-  std::cout << "Low: " << lo << "  High: " << hi << "\n";
+    curve(scores, 5, 5);
 
-  curve(scores, N, 5);
-  std::cout << "After curve +5: ";
-  printScores(scores, N);
+    cout << "After curve +5: ";
+    for (int i = 0; i < 5; i++)
+        cout << scores[i] << " ";
+    cout << "\n";
 
-  int at = -1;
-  if (findScore(scores, N, 100, &at)) std::cout << "100 found at index " << at << "\n";
-  if (!findScore(scores, N, 50, nullptr)) std::cout << "50 not found\n";
-  return 0;
+    if (findScore(scores, 5, 100, &index))
+        cout << "100 found at index " << index << "\n";
+
+    if (!findScore(scores, 5, 50, nullptr))
+        cout << "50 not found\n";
+
+    return 0;
 }
