@@ -12,7 +12,7 @@ Work without a working video link is incomplete.
 
 The video is half the grade. Show the run, then explain which variables each function changed and why.
 
-**Your demo:** _add your link here_
+**Your demo:** _[add your link here](https://youtu.be/XLxGpUzoyaw)_
 
 
 ## What to build
